@@ -98,26 +98,16 @@ GrowthbeatおよびGrowth Pushの初期化を行います。初期化では以�
 - (void)setDeviceToken:(id)deviceToken;
 ```
 
-AppDelegateクラス
+AppDelegateクラスの didRegisterForRemoteNotificationsWithDeviceToken に必ず実装してください。
 
 ```objc
 - (void) application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken`
 ```
 
-のメソッドで上記を必ず実装してください。
-
 ## プッシュ通知の有効・無効を判定
 
 ```objc
 - (BOOL)enableNotification;
-```
-
-## 基本タグの送信
-
-Device, OS, Language, Time Zone, Version, Buildが含まれます。
-
-```objc
-- (void)setDeviceTags;
 ```
 
 ## イベントの送信
@@ -210,6 +200,7 @@ iOSのみ利用できます。
 - (void)clearBadge;
 ```
 
+<!--
 # Growth Link API
 
 ## GrowthLinkインスタンスの取得
@@ -234,3 +225,4 @@ Growthbeatへデバイス登録・認証を行います。
 |:--|:--|
 |applicationId| アプリケーションID |
 |credentialId| クレデンシャルキー |
+-->

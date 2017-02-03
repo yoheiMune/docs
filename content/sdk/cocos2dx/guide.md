@@ -1,6 +1,6 @@
 ---
 categories: 'sdk'
-date: 2015-11-19T14:32:58+09:00
+date: 2017-01-06T14:32:58+09:00
 description: 'Growthbeat Cocos2dx の導入方法について説明します'
 draft: false
 title: Growthbeat Cocos2dx Gudeliene
@@ -368,6 +368,7 @@ GrowthLinkJNI.handleOpenUrl(getIntent().getData());
  - 次の実装変更点でご確認ください。
 
 - GrowthAnalyticsクラスがなくなりました。
+ - Growth Analyticsに関する記述は全て削除してください。
  - 2.x以降は、GrowthPush#setTag, trackEventをご利用ください。
 
 - GrowthbeatCoreクラスが、Growthbeatクラスに統合されました。

@@ -1,5 +1,6 @@
 ---
 categories: 'manual'
+publishdate: 2015-05-01T00:00:00+09:00
 date: 2016-07-06T12:05:16+09:00
 description: 'Growth Message'
 draft: false
@@ -10,7 +11,7 @@ title: 'Growth Message'
 
 ## 新規登録 / ログイン / 連携
 
-Growth Messageの管理画面へログインするためには、会員登録(無料)をする必要があります。Growth MessageのアカウントはSirokが提供すグロースハックツールのプラットフォームであるGrowthbeat( https://growthbeat.com/ )で管理されます。
+Growth Messageの管理画面へログインするためには、会員登録(無料)をする必要があります。Growth Messageのアカウントはシロクが提供するグロースハックツールのプラットフォームであるGrowthbeat( https://growthbeat.com/ )で管理されます。
 
 https://growthbeat.com/ より、会員登録を行うことができます。右上の【会員登録(無料)】をクリックしていただきますと、以下の画像に示されている画面に遷移してアカウント作成が行えます。メールアドレス・パスワード・お客様の属性を選択された後に、利用規約をご覧ください。利用規約とお知らせメールの受信に同意していただける場合にはチェックをしていただきまして、【無料登録】をクリックしていただけますと新規登録は完了です。
 
@@ -22,7 +23,7 @@ https://growthbeat.com/ より、会員登録を行うことができます。�
 <img src="/img/message/login.png" alt="login" title="login" width="100%"/>
 
 # 配信作成
-配信作成をするために、まずは対象となるアプリをメインメニューの【アプリ】から選択 してください。その後、サイドメニューから【配信作成】を選択します。 
+配信作成をするために、まずは対象となるアプリをメインメニューの【アプリ】から選択 してください。その後、サイドメニューから【配信作成】を選択します。
 <img src="/img/message/create.png" alt="create" title="create" width="100%"/>
 
 ## 配信対象

@@ -1,18 +1,35 @@
 ---
 categories: 'sdk'
-date: 2016-06-29T23:50:00+09:00
-description: 'Growthbeat Android の導入方法について説明します'
+date: 2017-01-06T12:00:00+09:00
+description: 'Growthbeat SDK for Android の導入方法について説明します'
 draft: false
-title: Growthbeat Android Gudeliene
+title: Growthbeat Android SDK | 全機能利用ガイド
 ---
 
 Version 2.0.4  
-# Growthbeat全ての機能を利用  
-## Growth Pushを利用  
+# Growthbeat利用ガイド  
+# 1. Growth Pushを利用  
 Growth Pushのみを利用する[導入方法](/sdk/android/guide)をご覧ください。
-## Growth Messageを利用  
-### 実装方法  
-#### プロジェクト設定  
+# 2. Growth Messageを利用 
+Growth Message を用いてポップアップを任意のタイミングで表示させるには、「[配信トリガー](http://support.growthbeat.com/manual/growthmessage/#配信トリガー)」 を設定します。「[配信トリガー](http://support.growthbeat.com/manual/growthmessage/#配信トリガー)」 は作成したカスタムイベントの中から選ぶ必要がございます。
+
+## 実装コード  
+配信トリガーとなるカスタムイベントを作成するには、ポップアップメッセージを表示させたい任意の場所に下記のようなイベントを送信するメソッドを記述してください。
+
+```java
+class MainActivity extends Activity {
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreated(savedInstanceState);
+
+        //...
+        GrowthPush.getInstance().trackEvent("OpenActivity");
+    }
+}
+```
+
+## AndroidManifest.xml設定  
 AndroidManifest.xmlにGrowth Message表示用のActivityを追加します。
 
 ```xml
@@ -23,8 +40,18 @@ AndroidManifest.xmlにGrowth Message表示用のActivityを追加します。
         android:theme="@android:style/Theme.Translucent" />
 </application>
 ```  
-#### 実装コード
-アプリに、Growth Pushの任意のイベントを送信します。アプリが任意のアクティビティが、呼び出されたときに、ポップアップメッセージを表示する実装を、例として紹介します。  
+## 管理画面設定方法
+
+「[配信トリガー](http://support.growthbeat.com/manual/growthmessage/#配信トリガー)」 で先程実装したイベント（今回の場合は OpenActivity）を選択すると、指定のイベントが発火したタイミングでメッセージが表示されます。
+
+詳しいメッセージの作成方法は [配信作成](http://support.growthbeat.com/manual/growthmessage/#配信作成) を参照してください。
+
+<!--
+# 3. GrowthLinkを利用  
+## 実装コード  
+### 初期化  
+Growth Linkの初期化処理を追加してください。  
+IntentFilterを設定したActivityのonCreateで、handleOpenUrlメソッドを呼び出してください。
 
 ```java
 class MainActivity extends Activity {
@@ -34,46 +61,12 @@ class MainActivity extends Activity {
         super.onCreated(savedInstanceState);
 
         //...
-
-        GrowthPush.getInstance().trackEvent("OpenActivity");
+        GrowthLink.getInstance().initialize(getApplicationContext(), "YOUR_APPLICATION_ID", "YOUR_CREDENTIAL_ID");
+        GrowthLink.getInstance().handleOpenUrl(getIntent().getData());
     }
 }
 ```  
-任意のイベントが呼び出されたときに表示するポップアップメッセージは、管理画面上で設定できます。  管理画面の設定については、次に説明します。  
-### 管理画面設定方法
-メッセージの作成方法は[こちら](/manual/growthmessage/#配信作成)を参考にしてください。  
-アプリ起動以外にも、カスタムイベントをメッセージ配信のトリガーにすることにより、アプリの任意の場所でメッセージを配信することができます。詳しくは、[こちら](/sdk/android/reference/#カスタムイベント送信)をご参照ください。  
-## GrowthLinkを利用  
-### 実装方法  
-#### プロジェクト設定  
-AndroidManifest.xmlにGrowth Message表示用のActivityを追加します。
-
-```xml
-<application>
-    <!-- ... -->
-    <receiver
-        android:name="com.growthbeat.link.InstallReferrerReceiver"
-        android:enabled="true"
-        android:exported="true" >
-        <intent-filter>
-            <action android:name="com.android.vending.INSTALL_REFERRER" />
-        </intent-filter>
-    </receiver>
-</application>
-```   
-#### 実装コード  
-**初期化**  
-Growth Linkの初期化処理を追加してください。
-
-```java
-GrowthLink.getInstance().initialize(getApplicationContext(), "YOUR_APPLICATION_ID", "YOUR_CREDENTIAL_ID");
-```  
-IntentFilterを設定したActivityのonCreateで、handleOpenUrlメソッドを呼び出してください。
-
-```java
-GrowthLink.getInstance().handleOpenUrl(getIntent().getData());
-```  
-**ディープリンクアクションの実装**  
+### ディープリンクアクションの実装  
 SDKには、IntentHandlerが定義されており、この実装でディープリンク時のアクションを実装することができます。  
 たとえば下記のような形で実装できます。  
 
@@ -99,8 +92,29 @@ class MyApplication extends Application {
     }
 }
 ```   
-# 最新版のSDKへの乗り換え方法  
-[SDKの乗り換え方法](/sdk/android/migrate)をご参照ください。  
+## AndroidManifest.xml設定  
+AndroidManifest.xmlにGrowth Link用のActivityを追加します。
+
+```xml
+<application>
+    ~~ 略 ~~
+    <receiver
+        android:name="com.growthbeat.link.InstallReferrerReceiver"
+        android:enabled="true"
+        android:exported="true" >
+        <intent-filter>
+            <action android:name="com.android.vending.INSTALL_REFERRER" />
+        </intent-filter>
+    </receiver>
+</application>
+```
+-->
+
 # 備考  
-実装サンプルは、[GitHubレポジトリ](https://github.com/growthbeat/growthbeat-android)を参考にしてください。  
+## 最新版のSDKへの乗り換え方法  
+Growth Push SDKからGrowthbeat 2.x SDK への乗り換えまたは、Growthbeat 1.x SDKからGrowthbeat 2.x SDKへの乗り換えをされる方は
+[SDKの移行ガイド](/sdk/android/upgrade)をご参照ください。    
+## サンプルについて  
+実装サンプルは、[Githubレポジトリ](https://github.com/growthbeat/growthbeat-android)を参考にしてください。  
+# お問い合わせ  
 ご不明な点などございます場合は、[ヘルプページ](http://faq.growthbeat.com/)を閲覧してください。  

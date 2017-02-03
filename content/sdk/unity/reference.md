@@ -1,6 +1,6 @@
 ---
 categories: 'sdk'
-date: 2015-11-16T14:32:58+09:00
+date: 2017-01-06T14:32:58+09:00
 description: 'Growthbeat Unity の API について説明します'
 draft: false
 title: Growthbeat Unity API
@@ -93,8 +93,11 @@ public static GrowthPush GetInstance ()
 ```
 
 ## 初期化
+GrowthbeatおよびGrowth Pushの初期化を行います。初期化では以下の処理が行われます。
 
-Growth Pushの初期化を行います。初期化では、デバイス登録、認証、および端末の基本情報の送信が行われます。
+- デバイス登録、認証
+- Growth Pushの初期化
+- 基本情報の送信
 
 ```cs
 public void Initialize (string applicationId, string credentialId, Environment environment)
@@ -139,14 +142,6 @@ public void SetDeviceToken (string deviceToken)
 public string GetDeviceToken ()
 ```
 
-## 基本タグの送信
-
-Device, OS, Language, Time Zone, Version, Buildが含まれます。
-
-```cs
-public void SetDeviceTags();
-```
-
 ## イベントの送信
 
 ### イベントの送信
@@ -176,10 +171,8 @@ public void TrackEvent (string name, string value)
 
 
 ### イベントと任意の値の送信
-
-メッセージ表示のコールバックを、ゲームオブジェクトの指定メソッドへ戻します。
-
-コールバックには、uuidの文字列が返ります。
+メッセージ表示のコールバックを、ゲームオブジェクトの指定メソッドへ戻します。  
+コールバックには、uuid の文字列が返ります。
 
 ```cs
 public void TrackEvent (string name, string value, string gameObjectName, string methodName)
@@ -194,7 +187,7 @@ public void TrackEvent (string name, string value, string gameObjectName, string
 |gameObjectName|コールバックするゲームオブジェクト|
 |methodName|コールバックするメソッド名|
 
-### メッセージ表示
+### ポップアップメッセージ表示
 
 ```cs
 public void RenderMessage (string uuid);
@@ -240,6 +233,7 @@ iOSのみ利用できます。
 public void ClearBadge ();
 ```
 
+<!--
 # Growth Link API
 
 ## Growth Link初期化
@@ -258,3 +252,4 @@ GrowthLink.GetInstance().Initialize (applicationId, credentialId);
 |:--|:--|
 |applicationId|アプリケーションID|
 |credentialId|クリデンシャルID|
+-->
